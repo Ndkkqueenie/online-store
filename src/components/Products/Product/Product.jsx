@@ -12,13 +12,13 @@ const Product = ({ product, onAddToCart }) => {
       <CardMedia className={classes.media} image={product.media.source} title={product.name} />
       <CardContent>
         <div className={classes.cardContent}>
-          <Typography variant='h6' gutterBottom>
+          <Typography variant='subtitle1' gutterBottom>
             {product.name}
           </Typography>
-        </div>
-        <Typography variant='h6' >
+          <Typography variant='subtitle2' >
             {product.price.formatted_with_symbol}
           </Typography>
+        </div>
         <Typography dangerouslySetInnerHTML={{__html: product.description}} variant='body2' color='textSecondary' />
       </CardContent>
       <CardActions disableSpacing className={classes.cardActions}>
