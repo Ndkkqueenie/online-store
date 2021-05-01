@@ -51,9 +51,8 @@ const Checkout = ({ cart, onCaptureCheckout, order, error }) => {
   let Confirmation = () => (order.customer ? (
     <>
       <div>
-        <Typography variant="h6">Thank you for your purchase, {order.customer.firstname} {order.customer.lastname}!</Typography>
+        <Typography variant="h6">Thank you for your purchase!</Typography>
         <Divider className={classes.divider} />
-        <Typography variant="subtitle2">Order ref: {order.customer_reference}</Typography>
       </div>
       <br />
       <Button component={Link} variant="outlined" type="button" to="/">Back to home</Button>
@@ -61,14 +60,14 @@ const Checkout = ({ cart, onCaptureCheckout, order, error }) => {
   ) : isFinished ? (
     <>
       <div>
-        <Typography variant="h6">Thank you for your purchase!</Typography>
+        <Typography variant="h6">Thank you for your purchase, {order.customer.firstname} {order.customer.lastname}!</Typography>
         <Divider className={classes.divider} />
+        <Typography variant="subtitle2">Order ref: {order.customer_reference}</Typography>
       </div>
       <br />
       <Button component={Link} variant="outlined" type="button" to="/">Back to home</Button>
     </>
-  ) 
-  :(
+  ) : (
     <div className={classes.spinner}>
       <CircularProgress />
     </div>
