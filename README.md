@@ -1,21 +1,10 @@
 # Online Store
 
-This project is an E-commerce store.
-It was built with [Create React App](https://github.com/facebook/create-react-app), project developed by Queendalin Ezenwa.
+This project is an E-commerce online clothing store, fully functional and responsive.
+It was built with [React](https://github.com/facebook/create-react-app) and [Commerce.js](https://commercejs.com).
 
-## Available Scripts
+![Image of glam-boutique](https://github.com/Ndkkqueenie/online-store/blob/main/glam.png)
 
-In the project directory, you can run:
+## Live Link
 
-### `yarn install`
-
-Install the app packages.\
-
-### `yarn start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.\
+Open [Glam Boutique](https://glam-boutique.netlify.app) 
