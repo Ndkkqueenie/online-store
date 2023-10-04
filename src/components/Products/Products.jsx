@@ -1,30 +1,44 @@
 import React from 'react';
-import { Grid } from '@material-ui/core';
+import { Grid, Typography, Container } from '@material-ui/core';
 import Product from './Product/Product';
 import useStyles from './styles';
+import { Refresh } from '@material-ui/icons';
 
 const Products = ({ categories, onAddToCart }) => {
-  const classes = useStyles(); // Move this line to the top
+  const classes = useStyles();
 
-  if (!categories.length) return <p>Loading...</p>
+  if (!categories.length) {
+    return (
+      <h1 className={classes.loader}>
+        <Refresh />
+        Loading...
+      </h1>
+    );
+  }
 
   return (
-    <main className={classes.content}>
+    <Container fixed>
       <div className={classes.toolbar} />
-      <Grid container justify="center" spacing={4}>
-        {categories.map(category => category.productsData.map((product) => (
-          <Grid 
-            item key={product.id} 
-            xs={12} 
-            sm={6} 
-            md={4} 
-            lg={3}
-          >
-            <Product product={product} onAddToCart={onAddToCart}/>
+      {categories.map((category) => (
+        <div key={category.id} className={classes.grid}>
+          <Typography variant="h4">{category.name}</Typography>
+          <Grid container justify="center" spacing={4}>
+            {category.productsData.map((product) => (
+              <Grid
+                item
+                key={product.id}
+                xs={9}
+                sm={6}
+                md={5}
+                lg={3}
+              >
+                <Product product={product} onAddToCart={onAddToCart} />
+              </Grid>
+            ))}
           </Grid>
-        )))}
-      </Grid>
-    </main>
+        </div>
+      ))}      
+    </Container>
   );
 }
 

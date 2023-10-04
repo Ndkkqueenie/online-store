@@ -1,7 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { Button } from '@material-ui/core';
-import backgroundImage from '../../assets/landingImg.png'; // Import your background image
+import backgroundImage from '../../assets/landingImg.png';
+import './styles.css';
 
 const LandingPage = () => {
   const backgroundStyle = {
@@ -11,24 +10,15 @@ const LandingPage = () => {
     minHeight: '100vh', // Ensure full viewport height
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center',
-  };
-
-  const buttonStyle = {
-    backgroundColor: 'rgba(0, 0, 0, 0.7)',
-    color: 'white',
   };
 
   return (
     <div style={backgroundStyle}>
-      <div>
-        <h1>Welcome to Our Online Store</h1>
-        <p>Discover amazing products at great prices.</p>
-        <Link to="/products">
-          <Button variant="contained" style={buttonStyle}>
-            Explore Products
-          </Button>
-        </Link>
+      <div className='main'>
+          <h1 className='text'>Now, furniture shopping is simple</h1>
+          <p className='text2'>We've got the furniture you need to fill your new home. 
+            Browse now for free and get big discounts on everything from tables to lamps!
+          </p>
       </div>
     </div>
   );

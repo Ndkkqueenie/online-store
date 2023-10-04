@@ -4,14 +4,8 @@ import {
   Toolbar,
   Badge,
   Typography,
-  Drawer,
-  List,
-  ListItem,
-  ListItemText,
-  makeStyles,
   IconButton,
 } from '@material-ui/core';
-import MenuIcon from '@material-ui/icons/Menu';
 import { ShoppingCart } from '@material-ui/icons';
 import { Link, useLocation} from 'react-router-dom';
 import Sidebar from './Sidebar/Sidebar';

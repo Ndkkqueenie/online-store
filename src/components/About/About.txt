@@ -1,0 +1,29 @@
+<section className="about-section">
+        <h2>Discover Categories</h2>
+        <p>Browse through our carefully curated categories, each offering a unique collection of furnitures. Whether you're looking for the latest trends, home decor items, or gadgets, you'll find it all here.</p>
+      </section>
+
+      <section className="about-section">
+        <h2>Seamless Shopping Experience</h2>
+        <p>Add your favorite items to your cart with just a click. Our intuitive interface ensures a seamless shopping experience. Track your order, update quantities, and remove items with ease.</p>
+      </section>
+
+      <section className="about-section">
+        <h2>Secure Checkout</h2>
+        <p>Rest assured that your payment information is safe and secure. Our secure checkout process makes online shopping worry-free. Complete your purchase with confidence.</p>
+      </section>
+
+      <section className="about-section">
+        <h2>Stay Informed</h2>
+        <p>Receive updates on your order status and delivery details. We keep you informed every step of the way.</p>
+      </section>
+
+      <section className="about-section">
+        <h2>Customer Support</h2>
+        <p>Our dedicated customer support team is here to assist you. If you have any questions or need assistance, don't hesitate to reach out. We're here to help.</p>
+      </section>
+
+      <section className="about-section">
+        <h2>Start Shopping Now</h2>
+        <p>Explore our store and discover the perfect items to enhance your lifestyle. Start shopping now and experience the joy of online shopping with us.</p>
+      </section>

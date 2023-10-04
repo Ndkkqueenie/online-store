@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { commerce } from './lib/commerce';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { Products, Navbar, Cart, Checkout, CategoryFilter, LandingPage } from './components';
-import { Category } from '@material-ui/icons';
+import { Products, Navbar, Cart, Checkout, LandingPage, About } from './components';
 
 function App() {
   const [categories, setCategories] = useState([]);
@@ -10,7 +9,7 @@ function App() {
   const [cart, setCart] = useState({});
   const [order, setOrder] = useState({});
   const [errorMessage, setErrorMessage] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('');
+  //const [selectedCategory, setSelectedCategory] = useState('');
 
   const fetchProducts = async () => {
     const { data: products } = await commerce.products.list();
@@ -77,13 +76,6 @@ function App() {
     }
   }
 
-  {/*const filterProductsByCategory = () => {
-    if (!selectedCategory) {
-      return products;
-    }
-    return products.filter((product) => product.category === selectedCategory);
-  };*/}
-
   useEffect(() => {
     fetchProducts();
     fetchCart();
@@ -115,6 +107,7 @@ function App() {
             />
           </Route>
         </Switch>
+      <About />
       </div>
     </Router> 
   );
