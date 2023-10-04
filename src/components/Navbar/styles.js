@@ -28,6 +28,13 @@ export default makeStyles((theme) => ({
       display: 'none',
     },
   },
+  drawer: {
+    width: '250px',
+  },
+  menuButton: {
+    marginLeft: '10px',
+    marginTop: '10px',
+  },
   grow: {
     flexGrow: 1,
   },

@@ -1,18 +1,34 @@
 import React, { useState, useEffect } from 'react';
 import { commerce } from './lib/commerce';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { Products, Navbar, Cart, Checkout } from './components';
+import { Products, Navbar, Cart, Checkout, CategoryFilter, LandingPage } from './components';
+import { Category } from '@material-ui/icons';
 
 function App() {
-  const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
+  // const [products, setProducts] = useState([]);
   const [cart, setCart] = useState({});
   const [order, setOrder] = useState({});
   const [errorMessage, setErrorMessage] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('');
 
   const fetchProducts = async () => {
-    const { data } = await commerce.products.list();
+    const { data: products } = await commerce.products.list();
+    const { data: categories } = await commerce.categories.list();
 
-    setProducts(data);
+    const productsByCategory = categories.reduce((acc, category) => {
+      return [
+        ...acc,
+        {
+          ...category,
+          productsData: products.filter((product) => 
+            product.categories.find((cat) => cat.id === category.id)
+          ),
+        },
+      ];
+    }, []);
+
+    setCategories(productsByCategory);
   }
 
   const fetchCart = async () => {
@@ -61,6 +77,13 @@ function App() {
     }
   }
 
+  {/*const filterProductsByCategory = () => {
+    if (!selectedCategory) {
+      return products;
+    }
+    return products.filter((product) => product.category === selectedCategory);
+  };*/}
+
   useEffect(() => {
     fetchProducts();
     fetchCart();
@@ -70,9 +93,10 @@ function App() {
     <Router>
       <div>
         <Navbar totalItems={cart.total_items} />
+        <LandingPage />
         <Switch>
           <Route exact path="/">
-            <Products products={products} onAddToCart={handleAddToCart} />
+            <Products categories={categories} onAddToCart={handleAddToCart} />
           </Route>
           <Route exact path="/cart">
             <Cart 

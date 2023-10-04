@@ -1,8 +1,21 @@
 import React from 'react';
-import { AppBar, Toolbar, IconButton, Badge, Typography } from '@material-ui/core';
+import {
+  AppBar,
+  Toolbar,
+  Badge,
+  Typography,
+  Drawer,
+  List,
+  ListItem,
+  ListItemText,
+  makeStyles,
+  IconButton,
+} from '@material-ui/core';
+import MenuIcon from '@material-ui/icons/Menu';
 import { ShoppingCart } from '@material-ui/icons';
 import { Link, useLocation} from 'react-router-dom';
-import logo from '../../assets/logo.jpg';
+import Sidebar from './Sidebar/Sidebar';
+import logo from '../../assets/logo.png';
 import useStyles from './styles';
 
 const Navbar = ({totalItems}) => {
@@ -13,9 +26,10 @@ const Navbar = ({totalItems}) => {
     <div>
       <AppBar position='fixed' className={classes.appBar} color='inherit'>
         <Toolbar>
+          <Sidebar/>
           <Typography component={Link} to="/" variant='h6' className={classes.title} >
             <img src={logo} alt='online store' height='30px' className={classes.image} />
-            Glam Boutique
+            Glam Furnitures
           </Typography>
           <div className={classes.grow} />
           {location.pathname === '/' && (

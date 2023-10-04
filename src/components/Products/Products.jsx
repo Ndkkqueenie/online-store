@@ -3,14 +3,16 @@ import { Grid } from '@material-ui/core';
 import Product from './Product/Product';
 import useStyles from './styles';
 
-const Products = ({products, onAddToCart}) => {
-  const classes = useStyles();
+const Products = ({ categories, onAddToCart }) => {
+  const classes = useStyles(); // Move this line to the top
+
+  if (!categories.length) return <p>Loading...</p>
 
   return (
     <main className={classes.content}>
       <div className={classes.toolbar} />
       <Grid container justify="center" spacing={4}>
-        {products.map((product) => (
+        {categories.map(category => category.productsData.map((product) => (
           <Grid 
             item key={product.id} 
             xs={12} 
@@ -20,7 +22,7 @@ const Products = ({products, onAddToCart}) => {
           >
             <Product product={product} onAddToCart={onAddToCart}/>
           </Grid>
-        ))}
+        )))}
       </Grid>
     </main>
   );
