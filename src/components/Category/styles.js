@@ -7,10 +7,6 @@ export default makeStyles((theme) => ({
     backgroundColor: theme.palette.background.default,
     padding: theme.spacing(3),
   },
-  header: {
-    marginTop: "30px"
-  },
-
   root: {
     flexGrow: 1,
   },

@@ -5,9 +5,13 @@ import useStyles from './styles';
 const CartItem = ({ item, onUpdateCartQty, onRemoveFromCart }) => {
   const classes = useStyles();
 
+  // Check if item.media exists before accessing item.media.source
+  const imageSource = item.image ? item.image.url : '';
+
   return (
     <Card>
-      <CardMedia image={item.media.source} alt={item.name} className={classes.media} />
+      {/* Use the imageSource variable for the image */}
+      <CardMedia image={imageSource} alt={item.name} className={classes.media} />
       <CardContent className={classes.cardContent}>
         <Typography variant='subtitle1'>{item.name}</Typography>
         <Typography variant='subtitle2'>{item.line_total.formatted_with_symbol}</Typography>

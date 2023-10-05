@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { commerce } from './lib/commerce';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { Products, Navbar, Cart, Checkout, LandingPage, About } from './components';
+import { Products, Navbar, Cart, Checkout, HomePage, Category } from './components';
 
 function App() {
   const [categories, setCategories] = useState([]);
-  // const [products, setProducts] = useState([]);
   const [cart, setCart] = useState({});
   const [order, setOrder] = useState({});
   const [errorMessage, setErrorMessage] = useState('');
-  //const [selectedCategory, setSelectedCategory] = useState('');
 
   const fetchProducts = async () => {
     const { data: products } = await commerce.products.list();
@@ -36,28 +34,24 @@ function App() {
   }
 
   const handleAddToCart = async (productId, quantity) => {
-    const { cart } = await commerce.cart.add(productId, quantity);
-
-    setCart(cart);
-  }
-
+    const item = await commerce.cart.add(productId, quantity);
+    setCart(item);
+  };
+  
   const handleUpdateCartQty = async (productId, quantity) => {
-    const { cart } = await commerce.cart.update(productId, { quantity });
-
-    setCart(cart);
-  }
+    const item = await commerce.cart.update(productId, { quantity });
+    setCart(item);
+  };
 
   const handleRemoveFromCart = async (productId) => {
-    const { cart } = await commerce.cart.remove(productId)
-
-    setCart(cart);
-  }
+    const item = await commerce.cart.remove(productId);
+    setCart(item);
+  };
 
   const handleEmptyCart = async () => {
-    const { cart } = await commerce.cart.empty();
-
-    setCart(cart);
-  }
+    const item = await commerce.cart.empty();
+    setCart(item);
+  };
 
   const refreshCart = async () => {
     const newCart = await commerce.cart.refresh();
@@ -83,11 +77,14 @@ function App() {
 
   return (
     <Router>
-      <div>
+      <div> 
         <Navbar totalItems={cart.total_items} />
-        <LandingPage />
         <Switch>
           <Route exact path="/">
+            <HomePage />
+            <Category categories={categories} />
+          </Route>
+          <Route path="/category/:categoryId" >
             <Products categories={categories} onAddToCart={handleAddToCart} />
           </Route>
           <Route exact path="/cart">
@@ -107,7 +104,6 @@ function App() {
             />
           </Route>
         </Switch>
-      <About />
       </div>
     </Router> 
   );
