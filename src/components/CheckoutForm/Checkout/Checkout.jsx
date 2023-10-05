@@ -25,16 +25,16 @@ const Checkout = ({ cart, onCaptureCheckout, order, error }) => {
       const generateToken = async () => {
         try {
           const token = await commerce.checkout.generateToken(cart.id, { type: 'cart' });
-
           setCheckoutToken(token);
         } catch {
           if (activeStep !== steps.length) history.push('/');
         }
       };
-
+  
       generateToken();
     }
-  }, [cart]);
+  }, [cart, activeStep, history]); // Include activeStep and history in the dependency array
+  
 
   const test = (data) => {
     setShippingData(data);
