@@ -2,30 +2,42 @@ import React, { useState, useEffect } from 'react';
 import { commerce } from './lib/commerce';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Products, Navbar, Cart, Checkout, HomePage, Category } from './components';
+import { Refresh } from '@material-ui/icons';
 
 function App() {
   const [categories, setCategories] = useState([]);
   const [cart, setCart] = useState({});
   const [order, setOrder] = useState({});
   const [errorMessage, setErrorMessage] = useState('');
+  const [isFetching, setIsFetching] = useState(true);
 
   const fetchProducts = async () => {
-    const { data: products } = await commerce.products.list();
-    const { data: categories } = await commerce.categories.list();
+    try {
+      const { data: products } = await commerce.products.list();
+      const { data: categories } = await commerce.categories.list();
 
-    const productsByCategory = categories.reduce((acc, category) => {
-      return [
-        ...acc,
-        {
-          ...category,
-          productsData: products.filter((product) => 
-            product.categories.find((cat) => cat.id === category.id)
-          ),
-        },
-      ];
-    }, []);
+      const productsByCategory = categories.map(category => ({
+        ...category,
+        productsData: products.filter(product =>
+          product.categories.find(cat => cat.id === category.id)
+        ),
+      }));
 
-    setCategories(productsByCategory);
+      setCategories(productsByCategory);
+      setIsFetching(false); // Set loading state to false after data is fetched
+    } catch (error) {
+      console.error('Error fetching products:', error);
+      setIsFetching(false); // Handle error by setting loading state to false
+    }
+  }
+
+  if (isFetching) {
+    return (
+      <h1>
+        <Refresh />
+        Loading...
+      </h1>
+    );
   }
 
   const fetchCart = async () => {
