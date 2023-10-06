@@ -16,7 +16,7 @@ export default makeStyles((theme) => ({
   },
   loader: {
     color: "color: #000000",
-    fontSize: "20px",
+    fontSize: "40px",
     textAlign: "center",
   }
 }));

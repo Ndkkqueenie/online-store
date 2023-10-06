@@ -31,18 +31,8 @@ function App() {
     }
   }
 
-  if (isFetching) {
-    return (
-      <h1>
-        <Refresh />
-        Loading...
-      </h1>
-    );
-  }
-
   const fetchCart = async () => {
-    setCart (await commerce.cart.retrieve())
-
+    setCart(await commerce.cart.retrieve());
   }
 
   const handleAddToCart = async (productId, quantity) => {
@@ -67,14 +57,12 @@ function App() {
 
   const refreshCart = async () => {
     const newCart = await commerce.cart.refresh();
-
     setCart(newCart);
   }
 
   const handleCaptureCheckout = async (CheckoutTokenId, newOrder) => {
     try {
       const incomingOrder = await commerce.checkout.capture(CheckoutTokenId, newOrder);
-
       setOrder(incomingOrder);
       refreshCart();
     } catch (error) {
@@ -91,31 +79,39 @@ function App() {
     <Router>
       <div> 
         <Navbar totalItems={cart.total_items} />
-        <Switch>
-          <Route exact path="/">
-            <HomePage />
-            <Category categories={categories} />
-          </Route>
-          <Route path="/category/:categoryId" >
-            <Products categories={categories} onAddToCart={handleAddToCart} />
-          </Route>
-          <Route exact path="/cart">
-            <Cart 
-              cart={cart}
-              handleUpdateCartQty={handleUpdateCartQty}
-              handleRemoveFromCart={handleRemoveFromCart}
-              handleEmptyCart={handleEmptyCart}
-            />
-          </Route>
-          <Route exact path="/checkout">
-            <Checkout 
-              cart={cart}
-              order={order}
-              onCaptureCheckout={handleCaptureCheckout}
-              error={errorMessage}
-            />
-          </Route>
-        </Switch>
+        {isFetching && (
+          <h1>
+            <Refresh />
+            Loading...
+          </h1>
+        )}
+        {!isFetching && (
+          <Switch>
+            <Route exact path="/">
+              <HomePage />
+              <Category categories={categories} />
+            </Route>
+            <Route path="/category/:categoryId">
+              <Products categories={categories} onAddToCart={handleAddToCart} />
+            </Route>
+            <Route exact path="/cart">
+              <Cart 
+                cart={cart}
+                handleUpdateCartQty={handleUpdateCartQty}
+                handleRemoveFromCart={handleRemoveFromCart}
+                handleEmptyCart={handleEmptyCart}
+              />
+            </Route>
+            <Route exact path="/checkout">
+              <Checkout 
+                cart={cart}
+                order={order}
+                onCaptureCheckout={handleCaptureCheckout}
+                error={errorMessage}
+              />
+            </Route>
+          </Switch>
+        )}
       </div>
     </Router> 
   );

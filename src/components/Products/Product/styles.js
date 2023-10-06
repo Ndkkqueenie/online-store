@@ -16,4 +16,9 @@ export default makeStyles(() => ({
     display: 'flex',
     justifyContent: 'space-between',
   },
+  loader: {
+    color: "color: #000000",
+    fontSize: "40px",
+    textAlign: "center",
+  }
 }));
